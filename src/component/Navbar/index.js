@@ -28,7 +28,7 @@ import {
 import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 import { IoClose } from "react-icons/io5";
 
-const Home = () => {
+const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onToggle } = useDisclosure();
   const {
@@ -178,4 +178,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Navbar;
