@@ -10,10 +10,10 @@ const Card = ({ img, title, artist, urls }) => {
 
         <Box p="6">
           <VStack spacing={4}>
-            <Text fontSize="xl" fontWeight="bold">
+            <Text fontSize="lg" fontWeight="bold" minH="50">
               {title}
             </Text>
-            <Text fontSize="lg">{artist}</Text>
+            <Text fontSize="md">{artist}</Text>
             <Link style={{ textDecoration: "none" }} href={urls}>
               <Button colorScheme="blue">Select</Button>
             </Link>
