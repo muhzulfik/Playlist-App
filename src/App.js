@@ -1,6 +1,6 @@
 import * as React from "react";
 import Home from "./pages";
-import Layout from "./component/Layout";
+import Layout from "./components/MainLayout";
 
 import { ChakraProvider } from "@chakra-ui/react";
 
