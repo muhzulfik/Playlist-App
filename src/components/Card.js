@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useMemo } from "react";
 
 import { Box, Text, Image, Button, VStack, Link } from "@chakra-ui/react";
+import useStore from "../store";
 
-const Card = ({ img, title, artist, urls }) => {
+const Card = ({ img, title, artist, id }) => {
+  const [addTrackId, isTrackIdExisted, trackIds] = useStore((state) => [
+    state.addTrackId,
+    state.isTrackIdExisted,
+    state.trackIds,
+  ]);
+  const isSelected = useMemo(() => isTrackIdExisted(id), [trackIds]);
+
+  const handleSelect = () => {
+    addTrackId(id);
+  };
+  console.log(isSelected);
   return (
     <>
       <Box maxW="xs" borderWidth="1px" borderRadius="lg" overflow="hidden">
@@ -14,8 +26,10 @@ const Card = ({ img, title, artist, urls }) => {
               {title}
             </Text>
             <Text fontSize="md">{artist}</Text>
-            <Link style={{ textDecoration: "none" }} href={urls}>
-              <Button colorScheme="blue">Select</Button>
+            <Link style={{ textDecoration: "none" }}>
+              <Button colorScheme="blue" onClick={handleSelect}>
+                {isSelected ? "Deselect" : "Select"}
+              </Button>
             </Link>
           </VStack>
         </Box>
