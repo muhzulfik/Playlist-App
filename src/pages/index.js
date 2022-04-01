@@ -24,6 +24,8 @@ const Home = () => {
   const [searchKey, setSearchKey] = useState("");
   const [show, setShow] = useState(true);
 
+  console.log(CLIENT_ID);
+
   useEffect(() => {
     const hash = window.location.hash;
     let token = window.localStorage.getItem("token");
@@ -37,10 +39,11 @@ const Home = () => {
 
       window.location.hash = "";
       window.localStorage.setItem("token", token);
+      window.localStorage.setItem("tracks", searchKey);
     }
 
     setToken(token);
-  }, []);
+  }, [searchKey]);
 
   const searchArtists = async (e) => {
     e.preventDefault();
@@ -64,6 +67,8 @@ const Home = () => {
     console.log(tracks);
   };
 
+  const spotify_url = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`;
+
   const renderTracks = () => {
     return tracks.map((e) => (
       <Card
@@ -71,17 +76,15 @@ const Home = () => {
         img={e.album.images[0].url}
         title={e.name}
         artist={e.album.artists[0].name}
-        urls={e.album.artists[0].external_urls.spotify}
+        id={e.id}
       />
     ));
   };
 
   const logout = () => {
     setToken("");
-    window.localStorage.removeItem("token");
+    window.localStorage.removeItem("token", token);
   };
-
-  console.log(logout);
 
   return (
     <>
@@ -92,10 +95,7 @@ const Home = () => {
       >
         {!token ? (
           <Button>
-            <a
-              href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}
-              textDecoration="none"
-            >
+            <a href={spotify_url} textDecoration="none">
               Login Auth
             </a>
           </Button>
@@ -127,7 +127,7 @@ const Home = () => {
                 img={e.album.images[0].url}
                 title={e.name}
                 artist={e.album.artists[0].name}
-                urls={e.album.artists[0].external_urls.spotify}
+                // urls={e.album.artists[0].external_urls.spotify}
               />
             ))}
           </SimpleGrid>
