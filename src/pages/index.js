@@ -14,17 +14,16 @@ import { useEffect, useState } from "react";
 import { Search2Icon } from "@chakra-ui/icons";
 
 const Home = () => {
-  const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
-  const REDIRECT_URI = "http://localhost:3000";
-  const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
-  const RESPONSE_TYPE = "token";
+  const {
+    REACT_APP_CLIENT_ID,
+    REACT_APP_REDIRECT_URL,
+    REACT_APP_AUTHORIZE_URL,
+  } = process.env;
 
   const [token, setToken] = useState("");
   const [tracks, setTracks] = useState([]);
   const [searchKey, setSearchKey] = useState("");
   const [show, setShow] = useState(true);
-
-  console.log(CLIENT_ID);
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -45,6 +44,7 @@ const Home = () => {
     setToken(token);
   }, [searchKey]);
 
+  //Search Songs
   const searchArtists = async (e) => {
     e.preventDefault();
     await axios
@@ -64,12 +64,14 @@ const Home = () => {
       .catch((err) => {
         console.log(err);
       });
-    console.log(tracks);
   };
 
-  const spotify_url = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`;
+  const handleLogin = () => {
+    window.location = `${REACT_APP_AUTHORIZE_URL}?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_REDIRECT_URL}&response_type=token&show_dialog=true`;
+  };
 
   const renderTracks = () => {
+    console.log({ tracks });
     return tracks.map((e) => (
       <Card
         key={e.id}
@@ -94,11 +96,7 @@ const Home = () => {
         spacing="10"
       >
         {!token ? (
-          <Button>
-            <a href={spotify_url} textDecoration="none">
-              Login Auth
-            </a>
-          </Button>
+          <Button onClick={handleLogin}>Login Spotify</Button>
         ) : (
           <Button onClick={logout}>Logout</Button>
         )}
@@ -127,7 +125,6 @@ const Home = () => {
                 img={e.album.images[0].url}
                 title={e.name}
                 artist={e.album.artists[0].name}
-                // urls={e.album.artists[0].external_urls.spotify}
               />
             ))}
           </SimpleGrid>
