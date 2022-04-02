@@ -1,10 +1,10 @@
 import React, { useMemo } from "react";
 
 import { Box, Text, Image, Button, VStack, Link } from "@chakra-ui/react";
-import useStore from "../store";
+import useSearchStore from "../store/useSearchStore";
 
 const Card = ({ img, title, artist, id }) => {
-  const [addTrackId, isTrackIdExisted, trackIds] = useStore((state) => [
+  const [addTrackId, isTrackIdExisted, trackIds] = useSearchStore((state) => [
     state.addTrackId,
     state.isTrackIdExisted,
     state.trackIds,
