@@ -1,20 +1,41 @@
-import React, { useMemo } from "react";
+import React from "react";
 
 import { Box, Text, Image, Button, VStack, Link } from "@chakra-ui/react";
-import useSearchStore from "../store/useSearchStore";
+import { useSelector } from "react-redux";
+import { selectToken } from "../store/tokenSlice";
+import { usePlaylist } from "../store/playlistStore";
+import { useState } from "react";
 
-const Card = ({ img, title, artist, id }) => {
-  const [addTrackId, isTrackIdExisted, trackIds] = useSearchStore((state) => [
-    state.addTrackId,
-    state.isTrackIdExisted,
-    state.trackIds,
-  ]);
-  const isSelected = useMemo(() => isTrackIdExisted(id), [trackIds]);
+import axios from "axios";
+
+const Card = ({ img, title, artist }) => {
+  const token = useSelector(selectToken);
+  const [isSelected, setIsSelected] = useState(false);
+  const playlistId = usePlaylist((state) => state.playlistIds);
 
   const handleSelect = () => {
-    addTrackId(id);
+    setIsSelected(!isSelected);
+    addPlaylist();
   };
-  console.log(isSelected);
+
+  const addPlaylist = async () => {
+    const url = `https://api.spotify.com/v1/playlists/${playlistId[10]}/tracks`;
+    await axios.post(
+      url,
+      {
+        uris: ["spotify:track:2hHeGD57S0BcopfVcmehdl"],
+        position: 0,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  };
+
+  console.log({ playlistId });
+
   return (
     <>
       <Box maxW="xs" borderWidth="1px" borderRadius="lg" overflow="hidden">

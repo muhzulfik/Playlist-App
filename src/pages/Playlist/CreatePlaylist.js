@@ -1,14 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import { Stack, Text, VStack, Input, Textarea, Button } from "@chakra-ui/react";
-import userStore from "../../store/userStore";
-
-const sendFromNetworkCall = (data) => console.log(data);
+import useUsers from "../../store/usersStore";
+import { selectToken } from "../../store/tokenSlice";
+import { usePlaylist } from "../../store/playlistStore";
+import { useSelector, useDispatch } from "react-redux";
+// import { setPlaylistId, selectPlaylistId } from "../../store/playlistSlice";
 
 const CreatePlaylist = () => {
+  // const dispatch = useDispatch();
+  // const playlistId = useSelector(selectPlaylistId);
+
   const [form, setForm] = useState({ title: "", desc: "" });
-  const userId = userStore((state) => state.id);
+  const { userId, fetch } = useUsers((state) => state);
+  const addPlaylistId = usePlaylist((state) => state.addPlaylistId);
+  const playlistId = usePlaylist((state) => state.playlistIds);
+  const token = useSelector(selectToken);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,7 +25,7 @@ const CreatePlaylist = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    sendFromNetworkCall(form);
+    fetch();
     if (form.title.length < 10) {
       alert("Title must be at least 10 characters");
     } else if (form.desc.length < 20) {
@@ -40,19 +48,24 @@ const CreatePlaylist = () => {
         },
         {
           headers: {
-            Authorization: "Bearer " + window.localStorage.getItem("token"),
+            Authorization: `Bearer ${token}`,
           },
         }
       )
       .then((res) => {
-        console.log(res);
-        setForm(res);
+        // dispatch(setPlaylistId(res.data.id));
+        addPlaylistId(res.data.id);
       })
       .catch((err) => {
         console.log(err);
       });
-    console.log(form);
   };
+
+  useEffect(() => {
+    createPlaylist();
+  }, []);
+
+  console.log("ini id", playlistId);
 
   return (
     <>
