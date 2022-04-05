@@ -19,12 +19,12 @@ const Card = ({ img, title, artist }) => {
   };
 
   const addPlaylist = async () => {
-    const url = `https://api.spotify.com/v1/playlists/${playlistId[10]}/tracks`;
+    const url = `https://api.spotify.com/v1/playlists/${playlistId}/tracks`;
     await axios.post(
       url,
       {
         uris: ["spotify:track:2hHeGD57S0BcopfVcmehdl"],
-        position: 0,
+        position: "",
       },
       {
         headers: {

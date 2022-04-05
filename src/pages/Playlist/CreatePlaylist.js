@@ -5,13 +5,9 @@ import { Stack, Text, VStack, Input, Textarea, Button } from "@chakra-ui/react";
 import useUsers from "../../store/usersStore";
 import { selectToken } from "../../store/tokenSlice";
 import { usePlaylist } from "../../store/playlistStore";
-import { useSelector, useDispatch } from "react-redux";
-// import { setPlaylistId, selectPlaylistId } from "../../store/playlistSlice";
+import { useSelector } from "react-redux";
 
 const CreatePlaylist = () => {
-  // const dispatch = useDispatch();
-  // const playlistId = useSelector(selectPlaylistId);
-
   const [form, setForm] = useState({ title: "", desc: "" });
   const { userId, fetch } = useUsers((state) => state);
   const addPlaylistId = usePlaylist((state) => state.addPlaylistId);
@@ -53,7 +49,6 @@ const CreatePlaylist = () => {
         }
       )
       .then((res) => {
-        // dispatch(setPlaylistId(res.data.id));
         addPlaylistId(res.data.id);
       })
       .catch((err) => {
