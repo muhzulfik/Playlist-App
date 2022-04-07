@@ -4,14 +4,14 @@ import store from "./store/store";
 
 import { ChakraProvider } from "@chakra-ui/react";
 import { Provider } from "react-redux";
-import { RouteList } from "./config";
+import AppRouter from "./routes";
 
 function App() {
   return (
     <Provider store={store}>
       <ChakraProvider>
         <Layout>
-          <RouteList />
+          <AppRouter />
         </Layout>
       </ChakraProvider>
     </Provider>
