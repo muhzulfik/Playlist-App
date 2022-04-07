@@ -44,6 +44,8 @@ const Search = () => {
       });
   };
 
+  console.log("this", tracks);
+
   return (
     <>
       <Stack
@@ -66,7 +68,7 @@ const Search = () => {
           </VStack>
         ) : (
           <VStack>
-            <Link to="/createplaylist">
+            <Link to="/create-playlist">
               <Button colorScheme="blue">Create Playlist</Button>
             </Link>
           </VStack>
@@ -95,6 +97,7 @@ const Search = () => {
                     img={e.album.images[0].url}
                     title={e.name}
                     artist={e.album.artists[0].name}
+                    uri={e.uri}
                   />
                 ))}
               </SimpleGrid>

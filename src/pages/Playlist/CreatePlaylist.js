@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import axiosInstance from "../../libs/axios";
 
 import { Stack, Text, VStack, Input, Textarea, Button } from "@chakra-ui/react";
 import useUsers from "../../store/usersStore";
@@ -9,7 +10,7 @@ import { useSelector } from "react-redux";
 
 const CreatePlaylist = () => {
   const [form, setForm] = useState({ title: "", desc: "" });
-  const { userId, fetch } = useUsers((state) => state);
+  const userId = useUsers((state) => state.userId);
   const addPlaylistId = usePlaylist((state) => state.addPlaylistId);
   const playlistId = usePlaylist((state) => state.playlistIds);
   const token = useSelector(selectToken);
@@ -21,7 +22,6 @@ const CreatePlaylist = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch();
     if (form.title.length < 10) {
       alert("Title must be at least 10 characters");
     } else if (form.desc.length < 20) {

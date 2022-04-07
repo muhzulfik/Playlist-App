@@ -10,7 +10,7 @@ const useUsers = create((set) => ({
         Authorization: `Bearer ${token}`,
       },
     });
-    set({ userId: await response.data.id });
+    set({ userId: response.data.id });
   },
 }));
 
