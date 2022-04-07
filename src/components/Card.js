@@ -8,7 +8,7 @@ import { useState } from "react";
 
 import axios from "axios";
 
-const Card = ({ img, title, artist }) => {
+const Card = ({ img, title, artist, uri }) => {
   const token = useSelector(selectToken);
   const [isSelected, setIsSelected] = useState(false);
   const playlistId = usePlaylist((state) => state.playlistIds);
@@ -23,7 +23,7 @@ const Card = ({ img, title, artist }) => {
     await axios.post(
       url,
       {
-        uris: ["spotify:track:2hHeGD57S0BcopfVcmehdl"],
+        uris: [uri],
         position: "",
       },
       {
