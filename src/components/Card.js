@@ -34,8 +34,6 @@ const Card = ({ img, title, artist, uri }) => {
     );
   };
 
-  console.log({ playlistId });
-
   return (
     <>
       <Box maxW="xs" borderWidth="1px" borderRadius="lg" overflow="hidden">

@@ -8,15 +8,13 @@ import {
   HStack,
   IconButton,
   Button,
-  Text,
 } from "@chakra-ui/react";
 import Card from "../../components/Card";
 import { useState } from "react";
 import { Search2Icon } from "@chakra-ui/icons";
-import { BsSpotify } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { setToken, selectToken } from "../../store/tokenSlice";
+import { selectToken } from "../../store/tokenSlice";
 
 const Search = () => {
   const [tracks, setTracks] = useState([]);
@@ -44,8 +42,6 @@ const Search = () => {
       });
   };
 
-  console.log("this", tracks);
-
   return (
     <>
       <Stack
@@ -53,57 +49,40 @@ const Search = () => {
         px={{ sm: "10", lg: "20" }}
         spacing="10"
       >
-        {!setToken ? (
-          <VStack marginTop="12%" spacing="5">
-            <Text
-              fontSize="5xl"
-              fontWeight="bold"
-              fontFamily="Send Flowers, cursive;"
-            >
-              Welcome To Playlist App
-            </Text>
-            <Button leftIcon={<BsSpotify />} colorScheme="green">
-              Login Spotify
-            </Button>
-          </VStack>
-        ) : (
-          <VStack>
-            <Link to="/create-playlist">
-              <Button colorScheme="blue">Create Playlist</Button>
-            </Link>
-          </VStack>
-        )}
-        {setToken && (
-          <Stack spacing="20">
-            <form onSubmit={searchArtists}>
-              <HStack>
-                <Input
-                  type="text"
-                  placeholder="Search"
-                  onChange={(e) => setSearchKey(e.target.value)}
+        <VStack>
+          <Link to="/create-playlist">
+            <Button colorScheme="blue">Create Playlist</Button>
+          </Link>
+        </VStack>
+        <Stack spacing="20">
+          <form onSubmit={searchArtists}>
+            <HStack>
+              <Input
+                type="text"
+                placeholder="Search"
+                onChange={(e) => setSearchKey(e.target.value)}
+              />
+              <IconButton
+                colorScheme="blue"
+                icon={<Search2Icon />}
+                type="submit"
+              />
+            </HStack>
+          </form>
+          <SimpleGrid>
+            <SimpleGrid columns={[2, null, 3]} spacing="50px">
+              {tracks.map((e) => (
+                <Card
+                  key={e.id}
+                  img={e.album.images[0].url}
+                  title={e.name}
+                  artist={e.album.artists[0].name}
+                  uri={e.uri}
                 />
-                <IconButton
-                  colorScheme="blue"
-                  icon={<Search2Icon />}
-                  type="submit"
-                />
-              </HStack>
-            </form>
-            <SimpleGrid>
-              <SimpleGrid columns={[2, null, 3]} spacing="50px">
-                {tracks.map((e) => (
-                  <Card
-                    key={e.id}
-                    img={e.album.images[0].url}
-                    title={e.name}
-                    artist={e.album.artists[0].name}
-                    uri={e.uri}
-                  />
-                ))}
-              </SimpleGrid>
+              ))}
             </SimpleGrid>
-          </Stack>
-        )}
+          </SimpleGrid>
+        </Stack>
       </Stack>
     </>
   );

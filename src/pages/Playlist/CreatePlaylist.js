@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import axiosInstance from "../../libs/axios";
 
 import { Stack, Text, VStack, Input, Textarea, Button } from "@chakra-ui/react";
 import useUsers from "../../store/usersStore";
@@ -12,7 +11,6 @@ const CreatePlaylist = () => {
   const [form, setForm] = useState({ title: "", desc: "" });
   const userId = useUsers((state) => state.userId);
   const addPlaylistId = usePlaylist((state) => state.addPlaylistId);
-  const playlistId = usePlaylist((state) => state.playlistIds);
   const token = useSelector(selectToken);
 
   const handleChange = (e) => {
@@ -59,8 +57,6 @@ const CreatePlaylist = () => {
   useEffect(() => {
     createPlaylist();
   }, []);
-
-  console.log("ini id", playlistId);
 
   return (
     <>

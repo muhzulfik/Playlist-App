@@ -6,7 +6,6 @@ import { selectToken } from "../store/tokenSlice";
 function ProtectedRoute({ component: Component, ...restOfProps }) {
   const token = useSelector(selectToken);
   const isAuthenticated = !!token;
-  console.log("this", token);
 
   return (
     <Route
