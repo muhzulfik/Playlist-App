@@ -40,7 +40,7 @@ const Card = ({ img, title, artist, uri }) => {
         <Image src={img} alt="" />
 
         <Box p="6">
-          <VStack spacing={4}>
+          <VStack spacing={3}>
             <Text fontSize="lg" fontWeight="bold" minH="50">
               {title}
             </Text>
