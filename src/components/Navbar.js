@@ -41,7 +41,7 @@ const Navbar = () => {
     <>
       <Box
         as="header"
-        px={{ sm: "7", lg: "14" }}
+        px={{ sm: "7", lg: "20" }}
         py={{ sm: "3", lg: "6" }}
         boxShadow="md"
       >
@@ -50,7 +50,7 @@ const Navbar = () => {
             <Heading size="lg">PlaylistApp</Heading>
           </Box>
           <Spacer />
-          <Box>
+          <HStack>
             <IconButton
               aria-label="Switch icon"
               icon={
@@ -63,20 +63,22 @@ const Navbar = () => {
               onClick={toggleColorMode}
               mr="2"
             />
-            <Link style={{ textDecoration: "none" }} href="/">
-              <Button variant="ghost" mr="2">
-                Beranda
-              </Button>
-            </Link>
-            <Button
-              variant="outline"
-              rounded="md"
-              colorScheme="facebook"
-              onClick={onModalOpen}
-            >
-              Say Hello
-            </Button>
-          </Box>
+            {navbarItemType.map((navItem) => (
+              <Box key={navItem.label}>
+                <Link
+                  p={2}
+                  href={navItem.href ?? "#"}
+                  fontSize={"sm"}
+                  fontWeight={500}
+                  _hover={{
+                    textDecoration: "none",
+                  }}
+                >
+                  {navItem.label}
+                </Link>
+              </Box>
+            ))}
+          </HStack>
         </HStack>
         <HStack d={{ base: "flex", md: "none" }} justifyContent="space-between">
           <Box>
@@ -177,5 +179,10 @@ const Navbar = () => {
     </>
   );
 };
+
+export const navbarItemType = [
+  { label: "Create Playlist", href: "/create-playlist" },
+  { label: "Search", href: "/search" },
+];
 
 export default Navbar;
