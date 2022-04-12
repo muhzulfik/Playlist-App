@@ -1,18 +1,9 @@
 import React from "react";
 import axios from "axios";
-import {
-  Stack,
-  VStack,
-  SimpleGrid,
-  Input,
-  HStack,
-  IconButton,
-  Button,
-} from "@chakra-ui/react";
+import { Stack, SimpleGrid, Input, IconButton, Flex } from "@chakra-ui/react";
 import Card from "../../components/Card";
 import { useState } from "react";
 import { Search2Icon } from "@chakra-ui/icons";
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../store/tokenSlice";
 
@@ -49,16 +40,12 @@ const Search = () => {
         px={{ sm: "10", lg: "20" }}
         spacing="10"
       >
-        <VStack>
-          <Link to="/create-playlist">
-            <Button colorScheme="blue">Create Playlist</Button>
-          </Link>
-        </VStack>
         <Stack spacing="20">
           <form onSubmit={searchArtists}>
-            <HStack>
+            <Flex>
               <Input
                 type="text"
+                mr={4}
                 placeholder="Search"
                 onChange={(e) => setSearchKey(e.target.value)}
               />
@@ -67,7 +54,7 @@ const Search = () => {
                 icon={<Search2Icon />}
                 type="submit"
               />
-            </HStack>
+            </Flex>
           </form>
           <SimpleGrid>
             <SimpleGrid columns={[2, null, 3]} spacing="50px">
