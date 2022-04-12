@@ -82,7 +82,9 @@ const CreatePlaylist = () => {
               value={form.desc}
               onChange={handleChange}
             />
-            <Button type="submit">Submit</Button>
+            <Button type="submit" colorScheme="blue">
+              Submit
+            </Button>
           </VStack>
         </form>
       </Stack>
