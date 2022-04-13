@@ -1,13 +1,13 @@
 import React from "react";
 import axios from "axios";
-import { Stack, SimpleGrid, Input, IconButton, Flex } from "@chakra-ui/react";
+import { Stack, SimpleGrid } from "@chakra-ui/react";
 import Card from "../../components/Card";
 import { useState } from "react";
-import { Search2Icon } from "@chakra-ui/icons";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../store/tokenSlice";
+import Search from "../../components/Search";
 
-const Search = () => {
+const SearchPage = () => {
   const [tracks, setTracks] = useState([]);
   const [searchKey, setSearchKey] = useState("");
   const token = useSelector(selectToken);
@@ -33,6 +33,10 @@ const Search = () => {
       });
   };
 
+  const handleClick = (e) => {
+    setSearchKey(e.target.value);
+  };
+
   return (
     <>
       <Stack
@@ -41,21 +45,7 @@ const Search = () => {
         spacing="10"
       >
         <Stack spacing="20">
-          <form onSubmit={searchArtists}>
-            <Flex>
-              <Input
-                type="text"
-                mr={4}
-                placeholder="Search"
-                onChange={(e) => setSearchKey(e.target.value)}
-              />
-              <IconButton
-                colorScheme="blue"
-                icon={<Search2Icon />}
-                type="submit"
-              />
-            </Flex>
-          </form>
+          <Search handleForm={searchArtists} handleChange={handleClick} />
           <SimpleGrid>
             <SimpleGrid columns={[2, null, 3]} spacing="50px">
               {tracks.map((e) => (
@@ -75,4 +65,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default SearchPage;
