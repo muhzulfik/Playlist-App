@@ -1,7 +1,7 @@
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Switch } from "react-router-dom";
 import { selectToken, setToken } from "../store/tokenSlice";
 import { LoginPage } from "../pages/Main/LoginPage";
-import Search from "../pages/Search";
+import SearchPage from "../pages/Search";
 import CreatePlaylist from "../pages/Playlist/CreatePlaylist";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -37,7 +37,7 @@ const AppRouter = () => {
     <BrowserRouter>
       <Switch>
         <AuthenticatedRoute path="/" component={LoginPage} exact />
-        <ProtectedRoute path="/search" component={Search} />
+        <ProtectedRoute path="/search" component={SearchPage} />
         <ProtectedRoute path="/create-playlist" component={CreatePlaylist} />
       </Switch>
     </BrowserRouter>
