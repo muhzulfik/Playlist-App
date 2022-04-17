@@ -4,7 +4,7 @@ import store from "./store/store";
 
 import { ChakraProvider } from "@chakra-ui/react";
 import { Provider } from "react-redux";
-import AppRouter from "./routes";
+import AppRouter from "./routes/index.jsx";
 
 function App() {
   return (
