@@ -1,7 +1,7 @@
 import { BrowserRouter, Switch } from "react-router-dom";
 import { selectToken, setToken } from "../store/tokenSlice";
 import { LoginPage } from "../pages/Main/LoginPage";
-import SearchPage from "../pages/Search";
+import SearchPage from "../pages/Search/index.tsx";
 import CreatePlaylist from "../pages/Playlist/CreatePlaylist";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
