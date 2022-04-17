@@ -1,7 +1,8 @@
 import React from "react";
 import axios from "axios";
 import { Stack, SimpleGrid } from "@chakra-ui/react";
-import Card from "../../components/Card";
+// @ts-ignore
+import Card from "../../components/Card/index.tsx";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../store/tokenSlice";
