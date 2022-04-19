@@ -12,10 +12,11 @@ interface typePlaylist {
   img: string;
   title: string;
   artist: string;
+  albumName: string;
   uri: string;
 }
 
-const Card = ({ img, title, artist, uri }: typePlaylist) => {
+const Card = ({ img, title, artist, albumName, uri }: typePlaylist) => {
   const token = useSelector(selectToken);
   const [isSelected, setIsSelected] = useState(false);
   // @ts-ignore
@@ -45,7 +46,7 @@ const Card = ({ img, title, artist, uri }: typePlaylist) => {
   return (
     <>
       <Box maxW="xs" borderWidth="1px" borderRadius="lg" overflow="hidden">
-        <Image src={img} alt="" />
+        <Image src={img} alt={albumName} />
 
         <Box p="6">
           <VStack spacing={3}>

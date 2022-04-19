@@ -27,6 +27,7 @@ const SearchPage = () => {
         },
       })
       .then((res) => {
+        console.log(res);
         setTracks(res.data.tracks.items);
       })
       .catch((err) => {
@@ -53,6 +54,7 @@ const SearchPage = () => {
                 <Card
                   key={e.id}
                   img={e.album.images[0].url}
+                  albumName={e.album.name}
                   title={e.name}
                   artist={e.album.artists[0].name}
                   uri={e.uri}
