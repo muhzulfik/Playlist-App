@@ -47,8 +47,6 @@ const PlaylistDetailPage = () => {
       });
   };
 
-  console.log(selectedPlaylist);
-
   useEffect(() => {
     detailPlaylist();
   }, []);
