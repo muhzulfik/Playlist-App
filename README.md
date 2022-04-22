@@ -33,11 +33,11 @@ git clone https://github.com/muhzulfik/Playlist-App
 ```bash
 cd Playlist-App
 ```
-3.Install Dependencies
+3. Install Dependencies
 ```bash
 npm install
 ```
-4.Set up Spotify Developers API
+4. Set up Spotify Developers API
 ```bash
 https://developer.spotify.com/documentation/web-api/guides/
 ```
